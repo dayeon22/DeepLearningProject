@@ -36,13 +36,16 @@ def predict_disease():
     test_images = test_images.reshape(test_images.shape[0], 256, 256, 1)
     predictions = model.predict(test_images)
 
+
+    # 표 출력
     print("\n\n============================================================================")
     print("%-50s| %7s | %10s" %("파일명", "확률", "결과"))
     print("============================================================================")
     for i in range(len(predictions)):
         print("%-50s | %7.3f%% | %10s" %(test_filenames[i], np.max(predictions[i]) * 100, label[np.argmax(predictions[i])]))
-    print("============================================================================")
+    print("============================================================================\n\n")
 
+    # 엑셀 저장
     excel = openpyxl.Workbook()
     sheet = excel.active
     sheet.append(["파일명", "코로나19", "일반", "폐렴", "결핵", "결과"])

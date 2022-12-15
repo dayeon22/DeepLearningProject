@@ -1,4 +1,4 @@
-train_data
-photos
+train_data/
+photos/
 .DS_Store
 .idea

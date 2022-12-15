@@ -24,7 +24,6 @@ class DataReader():
             for j, c_dir in enumerate(cls_dir):  # j: train/test
                 for el in os.listdir("../train_data/" + cls + "/" + c_dir):
                     filename = "../train_data/" + cls + "/" + c_dir + "/" + el
-                    #print(filename)
                     if j == 0:  # test 디렉토리 안의 파일이라면
                         self.test_X.append(np.asarray(img_convert(filename)))
                         self.test_Y.append(i)
@@ -38,6 +37,8 @@ class DataReader():
         self.test_X = np.asarray(self.test_X) / 255.0
         self.test_Y = np.asarray(self.test_Y)
 
+        # 흑백이미지를 학습시키기 위해 의도적으로 차원을 하나 추가해 줌
+        # https://stackoverflow.com/questions/47665391/keras-valueerror-input-0-is-incompatible-with-layer-conv2d-1-expected-ndim-4
         self.train_X = self.train_X.reshape(self.train_X.shape[0], 256, 256, 1)
         self.test_X = self.test_X.reshape(self.test_X.shape[0], 256, 256, 1)
 
